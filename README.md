@@ -27,12 +27,19 @@ tar -xvf immortalwrt-sdk-24.10.4-x86-64_gcc-13.3.0_musl.Linux-x86_64.tar.zst
 > Navigate to the package directory and clone the project.
 ```
 cd immortalwrt-sdk-24.10.4-x86-64_gcc-13.3.0_musl.Linux-x86_64/package/
-git clone https://github.com/mokanove/luci-app-powermanager.git
-# or git@github.com:mokanove/luci-app-powermanager.git
+git clone https://github.com/mokanove/luci-app-oplist.git
+# or git@github.com:mokanove/luci-app-oplist.git
 ```
 > Wake up, my dear
 ```
-cd ../
+cd ./luci-app-oplist/root/usr/bin
+curl -LO https://github.com/OpenListTeam/OpenList/releases/download/v4.1.10/openlist-linux-musl-amd64.tar.gz
+# or another openlist binary URL
+tar -xzvf openlist-linux-musl-amd64.tar.gz
+mv openlist-linux-musl-amd64/openlist ./
+rm -rf openlist-linux-musl-amd64/
+ls -ld openlist
+cd ../../../../
 ./scripts/feeds update -a && ./scripts/feeds install -a
 make package/luci-app-powermanager/compile V=s -j$(nproc)
 ```
