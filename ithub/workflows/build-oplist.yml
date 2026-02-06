@@ -1,0 +1,87 @@
+name: Build Luci-App-Oplist
+
+on:
+  schedule:
+    - cron: '0 3 * * *'
+  workflow_dispatch:
+
+env:
+  MY_REPO: "mokanove/luci-app-oplist"
+  UPSTREAM_REPO: "OpenListTeam/OpenList"
+  SDK_URL: "https://immortalwrt.kyarucloud.moe/releases/24.10.4/targets/x86/64/immortalwrt-sdk-24.10.4-x86-64_gcc-13.3.0_musl.Linux-x86_64.tar.zst"
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Prepending env...
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y build-essential libncurses5-dev libncursesw5-dev \
+            zlib1g-dev gawk git gettext libssl-dev xsltproc rsync wget unzip zstd
+
+      - name: checking-upstream
+        id: check_upstream
+        run: |
+          TAG=$(curl -s https://api.github.com/repos/${{ env.UPSTREAM_REPO }}/releases/latest | jq -r .tag_name)
+
+          EXISTS=$(curl -s https://api.github.com/repos/${{ env.MY_REPO }}/releases/tags/$TAG | jq -r .tag_name)
+
+          if [ "$TAG" == "$EXISTS" ]; then
+            echo "status=skip" >> $GITHUB_OUTPUT
+          else
+            echo "status=go" >> $GITHUB_OUTPUT
+          fi
+
+          DL_URL=$(curl -s https://api.github.com/repos/${{ env.UPSTREAM_REPO }}/releases/latest | jq -r '.assets[] | select(.name | contains("musl-amd64.tar.gz")) | .browser_download_url')
+          echo "tag=$TAG" >> $GITHUB_OUTPUT
+          echo "url=$DL_URL" >> $GITHUB_OUTPUT
+
+      - name: Download-Decompress
+        run: |
+          curl -LO ${{ env.SDK_URL }}
+          tar -I zstd -xvf *.tar.zst
+          mv immortalwrt-sdk-* sdk
+
+      - name: premake
+        run: |
+          cd sdk/package/
+          git clone https://github.com/${{ env.MY_REPO }}.git
+
+          cd luci-app-oplist
+          NEW_RELEASE=$(date +%s)
+          sed -i "s/PKG_RELEASE:=.*/PKG_RELEASE:=${NEW_RELEASE}/g" ./Makefile
+          echo "Makefile updated，PKG_RELEASE now is : ${NEW_RELEASE}"
+
+          cd root/usr/bin
+          curl -LO "${{ steps.check_upstream.outputs.url }}"
+          tar -xzvf *.tar.gz
+          find . -name "openlist" -type f -exec mv {} . \;
+          chmod +x openlist
+          rm -rf openlist-linux-*/ *.tar.gz
+          ls -lh
+
+      - name: wakeup
+        run: |
+          cd sdk
+          ./scripts/feeds update -a
+          ./scripts/feeds install -a
+          make defconfig
+          make package/luci-app-oplist/compile V=s -j$(nproc)
+
+      - name: collect-resoult
+        run: |
+          mkdir -p output
+          find sdk/bin/packages/x86_64/ -name "*.ipk" -exec cp {} output/ \;
+
+      - name: Release
+        uses: softprops/action-gh-release@v1
+        if: success()
+        with:
+          tag_name: ${{ steps.check_upstream.outputs.tag }}
+          files: output/*.ipk
+          body: |
+            - OpenList Updated to : ${{ steps.check_upstream.outputs.tag }}
+            - SDK: ImmortalWrt 24.10.4 x86_64
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
