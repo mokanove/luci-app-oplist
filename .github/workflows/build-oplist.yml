@@ -40,8 +40,8 @@ jobs:
       - name: Download-Decompress
         run: |
           curl -LO ${{ env.SDK_URL }}
-          tar -I zstd -xvf *.tar.zst
-          mv immortalwrt-sdk-* sdk
+          tar -xvf immortalwrt-sdk-24.10.4-x86-64_gcc-13.3.0_musl.Linux-x86_64.tar.zst
+          mv immortalwrt-sdk-24.10.4-x86-64_gcc-13.3.0_musl.Linux-x86_64 sdk
 
       - name: premake
         run: |
