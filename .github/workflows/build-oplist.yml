@@ -43,7 +43,6 @@ jobs:
           DL_URL=$(curl -s https://api.github.com/repos/OpenListTeam/OpenList/releases/latest | jq -r '.assets[] | select(.name | contains("musl-amd64.tar.gz")) | .browser_download_url')
           curl -LO ${DL_URL}
           tar -xzvf *.tar.gz
-          find . -name "openlist" -type f -exec mv {} . \;
           chmod +x openlist
           rm -f *.tar.gz DONOTREMOVE
 
