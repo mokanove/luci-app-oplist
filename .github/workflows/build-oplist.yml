@@ -10,7 +10,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
      - name: check-upstream
-        id: check_upstream
+       id: check_upstream
         run: |
           TAG=$(curl -s https://api.github.com/repos/OpenListTeam/OpenList/releases/latest | jq -r .tag_name)
           EXISTS=$(curl -s https://api.github.com/repos/mokanove/luci-app-oplist/releases/tags/$TAG | jq -r .tag_name)
