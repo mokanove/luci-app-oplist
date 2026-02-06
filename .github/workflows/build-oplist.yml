@@ -47,11 +47,11 @@ jobs:
         run: |
           cd sdk/package/
           git clone https://github.com/${{ env.MY_REPO }}.git
-
           cd luci-app-oplist
+
           NEW_RELEASE=$(date +%s)
           sed -i "s/PKG_RELEASE:=.*/PKG_RELEASE:=${NEW_RELEASE}/g" ./Makefile
-          echo "Makefile updated，PKG_RELEASE now is : ${NEW_RELEASE}"
+          echo "Makefile updated, PKG_RELEASE now is : ${NEW_RELEASE}"
 
           cd root/usr/bin
           curl -LO "${{ steps.check_upstream.outputs.url }}"
@@ -59,6 +59,7 @@ jobs:
           find . -name "openlist" -type f -exec mv {} . \;
           chmod +x openlist
           rm -rf openlist-linux-*/ *.tar.gz
+
           ls -lh
 
       - name: wakeup
