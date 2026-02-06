@@ -18,14 +18,11 @@ jobs:
           if [ "$TAG" == "$EXISTS" ]; then
             echo "status=skip" >> $GITHUB_OUTPUT
             echo "There is nothing to do."
+            exit 1
           else
             echo "status=go" >> $GITHUB_OUTPUT
             echo "tag=$TAG" >> $GITHUB_OUTPUT
           fi
-
-      - name: gohome
-        if: steps.check_upstream.outputs.status == 'skip'
-        uses: andymckay/cancel-action@0.3
 
       - name: install env
         run: |
