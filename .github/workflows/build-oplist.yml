@@ -1,6 +1,8 @@
 name: Autobuild luci-app-oplist
 
 on:
+  schedule:
+    - cron: '0 0 28 * *'
   workflow_dispatch:
   push:
 jobs:
