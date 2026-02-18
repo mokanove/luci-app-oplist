@@ -15,7 +15,7 @@ LuCI-APP for OpenList, which includes the latest version of the openlist binary 
 git clone https://github.com/mokanove/luci-app-oplist.git
 # or git@github.com:mokanove/luci-app-oplist.git
 ```
-## Wake up, my dear
+## Init project
 ```
 cd ./luci-app-oplist/root/usr/bin
 curl -LO https://github.com/OpenListTeam/OpenList/releases/download/v4.1.10/openlist-linux-musl-amd64.tar.gz
