@@ -4,6 +4,9 @@ msgstr "运行中"
 msgid "NOT RUNNING"
 msgstr "未运行"
 
+msgid "Open WebUI"
+msgstr "打开WebUI"
+
 msgid "Clicking the OpenWebUI button may result in the certificate not being trusted."
 msgstr "打开WebUI按钮点击后可能证书不信任。"
 
