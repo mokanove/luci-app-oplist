@@ -3,6 +3,8 @@ LuCI-APP for OpenList, which includes the latest version of the openlist binary 
 
 > WARN: Only support X86_64(amd64) ARCH !!!
 >
+> aarch64 version was prerelease , maybe have some questions
+>
 > Open Source : GNU GPL v3
 >
 > References: luci-app-openlist, luci-app-powermanager
