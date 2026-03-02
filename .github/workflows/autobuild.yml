@@ -1,8 +1,6 @@
-name: Autobuild luci-app-oplist
+name: Autobuild
 
 on:
-  schedule:
-    - cron: '0 0 28 * *'
   workflow_dispatch:
 jobs:
   build:
@@ -32,15 +30,15 @@ jobs:
       - name: download source code
         if: steps.check_upstream.outputs.status == 'go'
         run: |
-          curl -LO https://immortalwrt.kyarucloud.moe/releases/24.10.4/targets/x86/64/immortalwrt-sdk-24.10.4-x86-64_gcc-13.3.0_musl.Linux-x86_64.tar.zst
-          tar -xvf immortalwrt-sdk-24.10.4-x86-64_gcc-13.3.0_musl.Linux-x86_64.tar.zst
-          cd immortalwrt-sdk-24.10.4-x86-64_gcc-13.3.0_musl.Linux-x86_64/package/
+          curl -LO https://downloads.immortalwrt.org/releases/24.10.5/targets/x86/64/immortalwrt-sdk-24.10.5-x86-64_gcc-13.3.0_musl.Linux-x86_64.tar.zst
+          tar -xvf immortalwrt-sdk-24.10.5-x86-64_gcc-13.3.0_musl.Linux-x86_64.tar.zst
+          cd immortalwrt-sdk-24.10.5-x86-64_gcc-13.3.0_musl.Linux-x86_64/package/
           git clone https://github.com/mokanove/luci-app-oplist.git
 
       - name: download latest openlist
         if: steps.check_upstream.outputs.status == 'go'
         run: |
-          cd immortalwrt-sdk-24.10.4-x86-64_gcc-13.3.0_musl.Linux-x86_64/package/luci-app-oplist/root/usr/bin
+          cd immortalwrt-sdk-24.10.5-x86-64_gcc-13.3.0_musl.Linux-x86_64/package/luci-app-oplist/root/usr/bin
           DL_URL=$(curl -s https://api.github.com/repos/OpenListTeam/OpenList/releases/latest | jq -r '.assets[] | select(.name | contains("musl-amd64.tar.gz")) | .browser_download_url')
           curl -LO ${DL_URL}
           tar -xzvf *.tar.gz
@@ -50,7 +48,7 @@ jobs:
       - name: make
         if: steps.check_upstream.outputs.status == 'go'
         run: |
-          cd immortalwrt-sdk-24.10.4-x86-64_gcc-13.3.0_musl.Linux-x86_64
+          cd immortalwrt-sdk-24.10.5-x86-64_gcc-13.3.0_musl.Linux-x86_64
           rm -f package/luci-app-oplist/root/etc/openlist/DONOTREMOVE
           ./scripts/feeds update -a
           ./scripts/feeds install -a
@@ -61,7 +59,7 @@ jobs:
         if: steps.check_upstream.outputs.status == 'go'
         run: |
           mkdir -p output
-          find immortalwrt-sdk-24.10.4-x86-64_gcc-13.3.0_musl.Linux-x86_64/bin/packages/x86_64/ -name "*.ipk" -exec cp {} output/ \;
+          find immortalwrt-sdk-24.10.5-x86-64_gcc-13.3.0_musl.Linux-x86_64/bin/packages/x86_64/ -name "*.ipk" -exec cp {} output/ \;
 
       - name: Release
         uses: softprops/action-gh-release@v1
@@ -71,6 +69,6 @@ jobs:
           files: output/*.ipk
           body: |
             - OpenList Updated to : ${{ steps.check_upstream.outputs.tag }}
-            - There is an auto release
+            - There is an auto release by github actions & only X86 version
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
