@@ -30,7 +30,7 @@ jobs:
       - name: download source code
         if: steps.check_upstream.outputs.status == 'go'
         run: |
-          curl -LO https://downloads.immortalwrt.org/releases/24.10.5/targets/x86/64/immortalwrt-sdk-24.10.5-x86-64_gcc-13.3.0_musl.Linux-x86_64.tar.zst
+          curl -LO https://immortalwrt.kyarucloud.moe/releases/24.10.5/targets/x86/64/immortalwrt-sdk-24.10.5-x86-64_gcc-13.3.0_musl.Linux-x86_64.tar.zst
           tar -xvf immortalwrt-sdk-24.10.5-x86-64_gcc-13.3.0_musl.Linux-x86_64.tar.zst
           cd immortalwrt-sdk-24.10.5-x86-64_gcc-13.3.0_musl.Linux-x86_64/package/
           git clone https://github.com/mokanove/luci-app-oplist.git
