@@ -59,6 +59,11 @@ jobs:
           VERSION=$(grep -E "^PKG_VERSION[[:space:]]*:=" Makefile | sed -E 's/.*:=[[:space:]]*//' | tr -d '[:space:]')
           echo "version=$VERSION" >> $GITHUB_OUTPUT
 
+          if [ "${{ matrix.needs_patch }}" == "true" ]; then
+            cd ../../
+            sed -i 's/x86_64/aarch64_generic/g' Makefile
+          fi
+
           cd root/usr/bin/
           rm DONOTREMOVE
           curl -LO "https://github.com/OpenListTeam/OpenList/releases/download/v4.1.10/openlist-linux-musl-${{ matrix.openlist_arch }}.tar.gz"
@@ -66,11 +71,6 @@ jobs:
           rm -f *.tar.gz DONOTREMOVE
           cd ../../etc/openlist
           rm DONOTREMOVE
-
-          if [ "${{ matrix.needs_patch }}" == "true" ]; then
-            cd ../../
-            sed -i 's/x86_64/aarch64_generic/g' ./Makefile
-          fi
 
       - name: Build!
         run: |
