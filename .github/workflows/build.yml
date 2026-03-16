@@ -74,6 +74,7 @@ jobs:
 
       - name: Build!
         run: |
+          cd ${{ matrix.sdk_name }}
           make package/luci-app-oplist/compile V=s -j$(nproc)
 
       - name: Release
