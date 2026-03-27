@@ -13,25 +13,18 @@ jobs:
       fail-fast: false
       matrix:
         include:
-          - version: "24.10.5"
+          - version: "25.12.0-rc1"
             target: "x86"
             subtarget: "64"
             openlist_arch: "amd64"
-            sdk_name: "immortalwrt-sdk-24.10.5-x86-64_gcc-13.3.0_musl.Linux-x86_64"
-            ext: "ipk"
-            needs_patch: false
-          - version: "25.12-SNAPSHOT"
-            target: "x86"
-            subtarget: "64"
-            openlist_arch: "amd64"
-            sdk_name: "immortalwrt-sdk-25.12-SNAPSHOT-x86-64_gcc-14.3.0_musl.Linux-x86_64"
+            sdk_name: "immortalwrt-sdk-25.12.0-rc1-x86-64_gcc-14.3.0_musl.Linux-x86_64"
             ext: "apk"
             needs_patch: false
-          - version: "25.12-SNAPSHOT"
+          - version: "25.12.0-rc1"
             target: "rockchip"
             subtarget: "armv8"
             openlist_arch: "arm64"
-            sdk_name: "immortalwrt-sdk-25.12-SNAPSHOT-rockchip-armv8_gcc-14.3.0_musl.Linux-x86_64"
+            sdk_name: "immortalwrt-sdk-25.12.0-rc1-rockchip-armv8_gcc-14.3.0_musl.Linux-x86_64"
             ext: "apk"
             needs_patch: true
 
