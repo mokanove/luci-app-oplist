@@ -1,8 +1,8 @@
 include $(TOPDIR)/rules.mk
 
 PKG_NAME:=luci-app-oplist
-PKG_VERSION:=0.1.1
-PKG_RELEASE:=$(shell date +%Y%m%d%H%M)
+PKG_VERSION:=0.1.2
+PKG_RELEASE:=$(shell date +%Y%m%d%H%M%S)
 PKG_LICENSE:=GPL-3.0
 
 LUCI_TITLE:=LuCI support for OpenList

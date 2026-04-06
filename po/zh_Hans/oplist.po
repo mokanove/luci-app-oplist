@@ -58,5 +58,14 @@ msgstr "临时上传和下载文件缓存目录"
 msgid "Logs"
 msgstr "日志"
 
+msgid "Log is empty."
+msgstr "日志是空的"
+
+msgid "Log file does not exist."
+msgstr "日志文件不存在"
+
+msgstr "Unknown error"
+msgstr "未知错误"
+
 msgid "Refresh every 5 seconds."
 msgstr "每5秒刷新一次"

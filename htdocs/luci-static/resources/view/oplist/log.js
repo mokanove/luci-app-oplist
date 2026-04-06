@@ -1,28 +1,27 @@
+// SPDX-License-Identifier: Apache-2.0
+// Copied from https://github.com/Internet1235/luci-app-openlist/blob/main/luci-app-openlist/htdocs/luci-static/resources/view/openlist/log.js
 'use strict';
 'require dom';
 'require fs';
 'require poll';
+'require uci';
 'require view';
 
 return view.extend({
     render: function() {
-        var css = '                     \
-        #log_textarea {                 \
-        padding: 10px;              \
-        text-align: left;           \
-    }                               \
-    #log_textarea pre {             \
-    padding: .5rem;             \
-    word-break: break-all;      \
-    margin: 0;                  \
-    background: #1e1e1e;        \
-    color: #d4d4d4;             \
-    border-radius: 4px;         \
-    overflow-y: auto;           \
-    max-height: 600px;          \
-    }                               \
-    .description {                  \
-    background-color: #33ccff;  \
+        /* Thanks to luci-app-aria2 */
+        var css = '					\
+        #log_textarea {				\
+        padding: 10px;			\
+        text-align: left;		\
+    }					\
+    #log_textarea pre {			\
+    padding: .5rem;			\
+    word-break: break-all;		\
+    margin: 0;			\
+    }					\
+    .description {				\
+    background-color: #33ccff;	\
     }';
 
     var log_textarea = E('div', { 'id': 'log_textarea' },
@@ -41,9 +40,9 @@ return view.extend({
             ]);
 
             dom.content(log_textarea, log);
-            log.scrollTop = log.scrollHeight;
         }).catch(function(err) {
             var log;
+
             if (err.toString().includes('NotFoundError'))
                 log = E('pre', { 'wrap': 'pre' }, [
                     _('Log file does not exist.')
@@ -57,13 +56,15 @@ return view.extend({
         });
     }));
 
-    return E('div', {}, [
+    return E([
         E('style', [ css ]),
-             E('div', { 'class': 'cbi-section' }, [
-                 log_textarea,
-                 E('div', { 'style': 'text-align:right; margin-top:10px;' },
-                   E('small', {}, _('Refresh every 5 seconds.').format(L.env.pollinterval))
-                 )
+             E('div', {'class': 'cbi-map'}, [
+                 E('div', {'class': 'cbi-section'}, [
+                     log_textarea,
+                   E('div', {'style': 'text-align:right'},
+                     E('small', {}, _('Refresh every 5 seconds.').format(L.env.pollinterval))
+                   )
+                 ])
              ])
     ]);
     },
