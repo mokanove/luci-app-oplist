@@ -60,6 +60,9 @@ jobs:
           cd ${{ matrix.sdk_name }}
           make package/luci-app-oplist/compile V=s -j$(nproc)
 
+          cd bin/packages/*/base/
+          mv luci-app-oplist* luci-app-oplist-${{ steps.get_version.outputs.version }}-${{ matrix.openlist_arch }}.apk
+
       - name: Release
         uses: softprops/action-gh-release@master
         with:
@@ -70,6 +73,6 @@ jobs:
             # 🚀 Release Notes
             ### ✨ Change Logs
             - **External Updates**: The content of the action and Makefile has been optimized.
-            - **LuCI Updates**:
+            - **LuCI Updates**: Log page logic updated.
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
