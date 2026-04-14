@@ -7,14 +7,14 @@ msgstr "未运行"
 msgid "Open WebUI"
 msgstr "打开WebUI"
 
-msgid "Clicking the OpenWebUI button may result in the certificate not being trusted."
-msgstr "打开WebUI按钮点击后可能证书不信任。"
-
 msgid "A file list program powered by Gin and Solidjs."
 msgstr "基于 Gin 和 Solidjs 开发的文件列表程序"
 
 msgid "Default username: admin ; Default password: password"
 msgstr "默认用户名: admin ; 默认密码: password"
+
+msgid "If it does not start, please manually execute"
+msgstr "如果启动服务没反应，请手动执行"
 
 msgid "Enable Service"
 msgstr "启用服务"

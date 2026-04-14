@@ -68,8 +68,9 @@ jobs:
           files: |
               ${{ matrix.sdk_name }}/bin/packages/**/*.apk
           body: |
-            # 🚀 Release Notes
-            ### ✨ Change Logs
-            - **Binary Updates**: Upgraded OpenList to 4.2.1
+            # 📝 Release Notes
+            ### ✨ Change Log
+            - Fixed the issue of insufficient permissions for the init file during installation.
+            - The translation files have been updated.
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}

@@ -14,7 +14,7 @@
 ## 🛠 How to build?
 > To initialize the SDK, please go to <https://867678.xyz/sdk>
 ```
-export VERSION=v4.2.0
+export VERSION=v4.2.1
 export ARCH=amd64
 # ↑ Environment variables
 cd ./luci-app-oplist/root/usr/bin

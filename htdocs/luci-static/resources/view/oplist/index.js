@@ -60,7 +60,8 @@ return view.extend({
 
         m = new form.Map('oplist', _('OpenList'),
                          _('A file list program powered by Gin and Solidjs.') + '<br>' +
-                         _('Default username: admin ; Default password: password')
+                         _('Default username: admin ; Default password: password') + '<br>' +
+                         _('If it does not start, please manually execute /etc/init.d/oplist restart')
         );
 
         s = m.section(form.TypedSection);
@@ -87,7 +88,7 @@ return view.extend({
         o.datatype = 'port';
         o.placeholder = '5244';
 
-        o = s.option(form.Flag, 'tls_enabled', _('Enable TLS'), _('Clicking the OpenWebUI button may result in the certificate not being trusted.'));
+        o = s.option(form.Flag, 'tls_enabled', _('Enable TLS'));
         o.rmempty = false;
 
         o = s.option(form.Value, 'https_port', _('HTTPS Listen Port'));
