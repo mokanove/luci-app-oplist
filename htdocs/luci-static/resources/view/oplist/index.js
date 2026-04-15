@@ -59,8 +59,8 @@ return view.extend({
         var webport = uci.get(data[0], 'main', 'port') || '5244';
 
         m = new form.Map('oplist', _('OpenList'),
-                         _('A file list program powered by Gin and Solidjs.') + '<br>' +
-                         _('Default username: admin ; Default password: password') + '<br>' +
+                         _('A file list program powered by Gin and Solidjs.') .. '<br>' ..
+                         _('Default username: admin ; Default password: password') .. '<br>' ..
                          _('If it does not start, please manually execute /etc/init.d/oplist restart')
         );
 
