@@ -1,7 +1,5 @@
 # luci-app-oplist
 > LuCI support for OpenList
->
-> It is designed to solve the problem that the OpenList that comes with OpenWrt is too old.
 
 ## 🚀 Features
 - **Built-in Binary**: The musl binary file of OpenList is packaged, bypassing the source that comes with OpenWrt.
@@ -11,6 +9,7 @@
 ## 📦 Install
 [Releases](https://github.com/mokanove/luci-app-oplist/releases)
 [Generic Guide](https://867678.xyz/install-iapk)
+
 ## 🛠 How to build?
 > To initialize the SDK, please go to <https://867678.xyz/sdk>
 ```
@@ -31,6 +30,4 @@ rm DONOTREMOVE
 >
 > The log shows a partial quote: <https://github.com/Internet1235/luci-app-openlist/blob/main/luci-app-openlist/htdocs/luci-static/resources/view/openlist/log.js> With Apache-2.0 License
 > 
-> The other parts are open source under the GNU General Public License, version 3.
->
 > This application provides no warranties.

@@ -69,7 +69,6 @@ jobs:
               ${{ matrix.sdk_name }}/bin/packages/**/*.apk
           body: |
             # 📝 Release Notes
-            - Remove the "Open WebUI" button; **if that doesn't solve the problem, then deal with the person who raised it.**
-            - Remove the newly added _('If it does not start, please manually execute /etc/init.d/oplist restart')
+            - Restore Makefile
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
