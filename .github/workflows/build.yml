@@ -59,7 +59,7 @@ jobs:
       - name: Preparation before compilation
         shell: bash
         run: |
-          cd ${{ matrix.sdk_name }}/root/usr/bin/
+          cd ${{ matrix.sdk_name }}/package/${{ env.project_name }}/root/usr/bin/
           rm DONOTREMOVE
           curl -LO "https://github.com/OpenListTeam/OpenList/releases/download/v${{ env.openlist_version }}/openlist-linux-musl-${{ matrix.openlist_arch }}.tar.gz"
           tar -xzvf *.tar.gz
