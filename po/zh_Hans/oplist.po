@@ -1,3 +1,9 @@
+msgid "Config"
+msgstr "配置"
+
+msgid "Logs"
+msgstr "日志"
+
 msgid "RUNNING"
 msgstr "运行中"
 
@@ -48,9 +54,6 @@ msgstr "缓存目录"
 
 msgid "Directory for temporary files during upload/download."
 msgstr "临时上传和下载文件缓存目录"
-
-msgid "Logs"
-msgstr "日志"
 
 msgid "Collecting data..."
 msgstr "收集数据中..."
