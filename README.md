@@ -7,7 +7,7 @@
 - It only supports ImmortalWrt 25.12.0-rc2 or later.
 - It is not guaranteed that it can be used on non-x86_64(amd64) and non-aarch64(arm64) architectures.
 ## 🛠 How to build?
-[Generic Docs](https://867678.xyz/doc-build)
+[Generic Docs](https://867678.xyz/doc/build)
 > Additional notes:
 ```
 cd ⚠️sdk-root/package/luci-app-oplist/root/usr/bin/
